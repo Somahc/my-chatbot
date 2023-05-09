@@ -1,5 +1,6 @@
 export async function getResponse(prompt = '') {
     const API_KEY = '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'
+    let exportResponse = '';
 
     console.log(prompt)
     if (prompt == '') return
@@ -21,8 +22,10 @@ export async function getResponse(prompt = '') {
             //stop: [' Human:', ' AI:'] // 途中で生成を停止する単語
         })
     })
-
-    return response;
+    .then(response => response.json())
+    .then(data => {
+        exportResponse = data.choices[0].message.content;
+    })
     /*
     .then(response => response.json())
     .then(data => {
@@ -33,4 +36,5 @@ export async function getResponse(prompt = '') {
         console.log('エラー発生！')
     })
     */
+   return exportResponse;
 }

@@ -11,12 +11,7 @@ const result = ref("結果")
 
 const send_onClick = async () => {
   const response = await getResponse(message.value)
-    .then(response => response.json())
-    .then(data => {
-        const responseMessage = data.choices[0].message.content;
-        console.log(responseMessage)
-        result.value = responseMessage;
-    })
+  result.value = response;
 }
 
 </script>
