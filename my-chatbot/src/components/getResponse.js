@@ -24,7 +24,7 @@ export async function getResponse(prompt = '') {
     })
     .then(response => response.json())
     .then(data => {
-        exportResponse = data.choices[0].message.content;
+        exportResponse = data.choices[0].message;
     })
     /*
     .then(response => response.json())

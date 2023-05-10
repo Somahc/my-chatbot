@@ -4,9 +4,10 @@ import { ref } from 'vue'
 import { Configuration, OpenAIApi } from "openai";
 import { getResponse } from './components/getResponse'
 
-const message = ref("")
+const message = ref("");
+const result = ref("結果");
+const messageHistory = ref([]);
 
-const result = ref("結果")
 
 
 const send_onClick = async () => {
