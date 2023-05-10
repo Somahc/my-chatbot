@@ -9,8 +9,6 @@ const message = ref("");
 const result = ref("結果");
 const messageHistory = ref([]);
 
-
-
 const send_onClick = async () => {
   const prompt = makePrompt(message.value);
   messageHistory.value.push(prompt);
@@ -23,9 +21,11 @@ const send_onClick = async () => {
 
 <template>
   <v-app>
-    {{ messageHistory }}
     <div v-for="message in messageHistory">
       <div v-if="message.role == 'assistant'" class="aiMessage">
+        {{ message.content }}
+      </div>
+      <div v-if="message.role == 'user'" class="userMessage">
         {{ message.content }}
       </div>
     </div>
