@@ -12,9 +12,9 @@ const messageHistory = ref([]);
 
 
 const send_onClick = async () => {
-  console.log(makePrompt(message.value));
-  messageHistory.value.push(message.value);
-  const response = await getResponse(message.value);
+  const prompt = makePrompt(message.value);
+  messageHistory.value.push(prompt);
+  const response = await getResponse(prompt);
   message.value = '';
   messageHistory.value.push(response);
 }
@@ -23,6 +23,7 @@ const send_onClick = async () => {
 
 <template>
   <v-app>
+    {{ messageHistory }}
     <div v-for="message in messageHistory">
       <div v-if="message.role == 'assistant'" class="aiMessage">
         {{ message.content }}

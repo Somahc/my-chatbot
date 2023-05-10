@@ -13,7 +13,7 @@ export async function getResponse(prompt = '') {
         },
         body: JSON.stringify({
             model: 'gpt-3.5-turbo',
-            messages: [{ role: 'user', content: prompt }],
+            messages: [prompt],
             max_tokens: 150, // 出力される文章量の最大値（トークン数） max:4096
             temperature: 1, // 単語のランダム性 min:0.1 max:2.0
             top_p: 1, // 単語のランダム性 min:-2.0 max:2.0
