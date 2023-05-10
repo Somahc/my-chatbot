@@ -11,14 +11,20 @@ const messageHistory = ref([]);
 
 
 const send_onClick = async () => {
-  const response = await getResponse(message.value)
-  result.value = response;
+  const response = await getResponse(message.value);
+  result.value = response.content;
+  messageHistory.value.push(response);
 }
 
 </script>
 
 <template>
   <v-app>
+    <div v-for="message in messageHistory">
+      <div v-if="message.role == 'assistant'" class="aiMessage">
+        {{ message.content }}
+      </div>
+    </div>
     <v-form>
     <v-container>
       <v-row>
@@ -41,5 +47,11 @@ const send_onClick = async () => {
 </template>
 
 <style>
+.aiMessage{
+  background-color: antiquewhite;
+}
 
+.userMessage{
+  background-color: aquamarine;
+}
 </style>
