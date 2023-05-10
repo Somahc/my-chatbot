@@ -2,7 +2,8 @@
 import { processExpression } from '@vue/compiler-core';
 import { ref } from 'vue'
 import { Configuration, OpenAIApi } from "openai";
-import { getResponse } from './components/getResponse'
+import { getResponse } from './components/getResponse';
+import makePrompt from './components/makePrompt'
 
 const message = ref("");
 const result = ref("結果");
@@ -11,8 +12,10 @@ const messageHistory = ref([]);
 
 
 const send_onClick = async () => {
+  console.log(makePrompt(message.value));
+  messageHistory.value.push(message.value);
   const response = await getResponse(message.value);
-  result.value = response.content;
+  message.value = '';
   messageHistory.value.push(response);
 }
 
@@ -42,7 +45,6 @@ const send_onClick = async () => {
       </v-row>
     </v-container>
   </v-form>
-  {{ result }}
   </v-app>
 </template>
 
