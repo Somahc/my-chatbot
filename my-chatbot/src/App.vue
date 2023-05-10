@@ -62,6 +62,7 @@ const send_onClick = async () => {
   margin-right: 200px;
   padding: 15px;
   font-size: large;
+  font-weight: 700;
 
 }
 
@@ -72,6 +73,7 @@ const send_onClick = async () => {
   margin-left: 200px;
   padding: 15px 15px 15px 15px;
   font-size: large;
+  font-weight: 700;
 }
 
 .chatContainer{
