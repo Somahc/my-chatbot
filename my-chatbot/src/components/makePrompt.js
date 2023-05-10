@@ -1,5 +1,6 @@
-export default function makePrompt(userMessage) {
-    let prompt = { role: 'user', content: '' };
+export default function makePrompt(role, userMessage) {
+    let prompt = { role: '', content: '' };
+    prompt.role = role;
     prompt.content = userMessage;
     return prompt;
 }
