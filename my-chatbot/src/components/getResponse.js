@@ -1,5 +1,5 @@
 export async function getResponse(prompt = '') {
-    const API_KEY = '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'
+    const API_KEY = import.meta.env.VITE_GPT_APIKEY;
     let exportResponse = '';
 
     console.log(prompt)
