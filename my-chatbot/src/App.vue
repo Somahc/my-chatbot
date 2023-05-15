@@ -22,36 +22,10 @@ const send_onClick = async () => {
 </script>
 
 <template>
+  <nav>
+    <router-link to="/">Top</router-link>  | <router-link to="/chat">Chat</router-link>
+  </nav>
   <router-view />
-  <v-app>
-    <div class="chatContainer">
-      <div v-for="message in messageHistory" class="messageBox">
-        <div v-if="message.role == 'assistant'" class="aiMessage">
-          {{ message.content }}
-        </div>
-        <div v-if="message.role == 'user'" class="userMessage">
-          {{ message.content }}
-        </div>
-      </div>
-      <v-form>
-      <v-container>
-        <v-row>
-          <v-col>
-            <v-text-field
-              v-model="message"
-              type="text"
-              placeholder="メッセージを送信"
-            >
-              <template v-slot:append>
-                <v-btn color="primary" @click="send_onClick">送信</v-btn>
-              </template>
-            </v-text-field>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-form>
-    </div>
-  </v-app>
 </template>
 
 <style>
