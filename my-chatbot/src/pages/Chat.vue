@@ -1,5 +1,4 @@
 <script setup>
-import { processExpression } from '@vue/compiler-core';
 import { ref } from 'vue'
 import { getResponse } from '../components/getResponse';
 import makePrompt from '../components/makePrompt'
@@ -21,41 +20,39 @@ const send_onClick = async () => {
 
 </script>
 
-<template>
-    <v-app>   
-        <div>
-            <h2>
-                Chat.vueテストページ
-            </h2>
-        </div>
-        <div class="chatContainer">
-            <div v-for="message in messageHistory" class="messageBox">
-                <div v-if="message.role == 'assistant'" class="aiMessage">
-                    {{ message.content }}
-                </div>
-                <div v-if="message.role == 'user'" class="userMessage">
-                    {{ message.content }}
-                </div>
+<template>  
+    <div>
+        <h2>
+            Chat.vueテストページ
+        </h2>
+    </div>
+    <div class="chatContainer">
+        <div v-for="message in messageHistory" class="messageBox">
+            <div v-if="message.role == 'assistant'" class="aiMessage">
+                {{ message.content }}
             </div>
-            <v-form>
-                <v-container>
-                    <v-row>
-                        <v-col>
-                            <v-text-field
-                            v-model="message"
-                            type="text"
-                            placeholder="メッセージを送信"
-                            >
-                                <template v-slot:append>
-                                    <v-btn color="primary" @click="send_onClick">送信</v-btn>
-                                </template>
-                            </v-text-field>
-                        </v-col>
-                    </v-row>
-                </v-container>
-            </v-form>
+            <div v-if="message.role == 'user'" class="userMessage">
+                {{ message.content }}
+            </div>
         </div>
-    </v-app>   
+        <v-form>
+            <v-container>
+                <v-row>
+                    <v-col>
+                        <v-text-field
+                        v-model="message"
+                        type="text"
+                        placeholder="メッセージを送信"
+                        >
+                            <template v-slot:append>
+                                <v-btn color="primary" @click="send_onClick">送信</v-btn>
+                            </template>
+                        </v-text-field>
+                    </v-col>
+                </v-row>
+            </v-container>
+        </v-form>
+    </div>
 </template>
 
 <style>
