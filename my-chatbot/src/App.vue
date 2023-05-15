@@ -24,6 +24,7 @@ const send_onClick = async () => {
 </script>
 
 <template>
+  <router-view />
   <v-app>
     <div class="chatContainer">
       <div v-for="message in messageHistory" class="messageBox">
