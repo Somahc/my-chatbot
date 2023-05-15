@@ -1,12 +1,10 @@
 <script setup>
 import { processExpression } from '@vue/compiler-core';
 import { ref } from 'vue'
-import { Configuration, OpenAIApi } from "openai";
 import { getResponse } from './components/getResponse';
 import makePrompt from './components/makePrompt'
 
 const message = ref("");
-const result = ref("結果");
 const messageHistory = ref([]);
 
 //初期メッセージ
