@@ -5,17 +5,19 @@ import makePrompt from '../components/makePrompt'
 
 const message = ref("");
 const messageHistory = ref([]);
-
+const isLoading = ref(false);
 //初期メッセージ
 messageHistory.value.push(makePrompt('assistant', 'こんにちは！なにかお手伝いできることはありますか？'));
 
 //送信ボタンクリック時
 const send_onClick = async () => {
+    isLoading.value = true;
   const prompt = makePrompt('user', message.value);
   messageHistory.value.push(prompt);
   const response = await getResponse(prompt);
   message.value = '';
   messageHistory.value.push(response);
+  isLoading.value = false;
 }
 
 </script>
@@ -39,6 +41,7 @@ const send_onClick = async () => {
             <v-container>
                 <v-row>
                     <v-col>
+                        <div v-if="isLoading" class="loading">ChatGPTがタイプ中...</div>
                         <v-text-field
                         v-model="message"
                         type="text"
@@ -84,5 +87,9 @@ const send_onClick = async () => {
 .messageBox{
   padding-top: 4px;
   padding-bottom: 4px;
+}
+
+.loading{
+    font-weight: 700;
 }
 </style>
