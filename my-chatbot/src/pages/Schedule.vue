@@ -1,8 +1,9 @@
 <script setup>
-
+import Calendar from '../components/Calendar.vue';
 </script>
 
 <template>
+    <Calendar />
     <v-form>
         <v-container>
             <v-row>
