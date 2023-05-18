@@ -3,6 +3,7 @@ import '@mdi/font/css/materialdesignicons.css'
 import router from './router';
 //import './style.css'
 import App from './App.vue'
+import VCalendar from 'v-calendar';
 
 // Vuetify
 import 'vuetify/styles'
@@ -13,4 +14,4 @@ const vuetify = createVuetify({
   components,
   directives,
 })
-createApp(App).use(vuetify).use(router).mount('#app')
+createApp(App).use(vuetify).use(router).use(VCalendar).mount('#app')
