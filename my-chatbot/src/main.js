@@ -3,8 +3,8 @@ import '@mdi/font/css/materialdesignicons.css'
 import router from './router';
 //import './style.css'
 import App from './App.vue'
-import VCalendar from 'v-calendar';
-
+import VCalendar from 'v-calendar'
+import 'v-calendar/style.css';
 // Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
