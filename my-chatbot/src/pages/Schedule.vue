@@ -1,7 +1,7 @@
 <script setup>
 import Calendar from '../components/Calendar.vue';
 import moment from "moment";
-import { onMounted } from 'vue';
+import { onMounted, computed } from 'vue';
 
 const currentDate = moment();
 
@@ -41,6 +41,10 @@ const getCalendar = () => {
     return calendars;
 }
 
+const calendars = computed(() => {
+    return getCalendar();
+})
+
 onMounted(() => {
     console.log(getStartDate())
     console.log(getEndDate())
@@ -50,5 +54,12 @@ onMounted(() => {
 </script>
 
 <template>
+    <h2>{{ currentDate }}</h2>
+    <div v-for="(week, index) in calendars" :key="index" style="display:flex">
+        <div v-for="(day, index) in week" :key="idnex">
+            {{ day.date }}
+        </div>
+    </div>
+
      <v-calendar expanded></v-calendar>
 </template>
