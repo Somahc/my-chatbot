@@ -55,18 +55,18 @@ onMounted(() => {
 
 <template>
     <h2>{{ currentDate }}</h2>
-    <div style="max-width:900px;border-top:5px solid red;">
+    <div style="max-width:900px;border-top:1px solid gray;">
         <div 
             v-for="(week, index) in calendars" 
             :key="index" 
-            style="display:flex;border-left:5px solid green;"
+            style="display:flex;border-left:1px solid gray;"
         >
             <div v-for="(day, index) in week" 
                 :key="index"
                 style="
                     flex:1;min-height: 125px;
-                    border-right:5px solid blue;
-                    border-bottom:5px solid blue
+                    border-right:1px solid gray;
+                    border-bottom:1px solid gray
                 "
             >
                 {{ day.date }}
