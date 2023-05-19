@@ -1,9 +1,9 @@
 <script setup>
 import Calendar from '../components/Calendar.vue';
 import moment from "moment";
-import { onMounted, computed } from 'vue';
+import { onMounted, computed, ref } from 'vue';
 
-const currentDate = moment();
+const currentDate = ref(moment());
 
 //カレンダー最初の日を取得
 const getStartDate = () => {
@@ -45,6 +45,13 @@ const calendars = computed(() => {
     return getCalendar();
 })
 
+const nextMonth = () => {
+    currentDate.value = moment(currentDate).add(1, "month");
+}
+
+const prevMonth = () => {
+    currentDate.value = moment(currentDate).subtract(1, "month");
+}
 onMounted(() => {
     console.log(getStartDate())
     console.log(getEndDate())
@@ -55,6 +62,8 @@ onMounted(() => {
 
 <template>
     <h2>{{ currentDate }}</h2>
+    <button @click="prevMonth">前の月</button>
+    <button @click="nextMonth">次の月</button>
     <div style="max-width:900px;border-top:1px solid gray;">
         <div 
             v-for="(week, index) in calendars" 
