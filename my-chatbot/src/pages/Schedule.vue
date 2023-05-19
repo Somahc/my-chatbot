@@ -3,11 +3,18 @@ import Calendar from '../components/Calendar.vue';
 import moment from "moment";
 import { onMounted } from 'vue';
 
+const currentDate = moment();
+
+const getStartDate = () => {
+    let date = moment(currentDate);
+    date.startOf("month");
+    const youbiNum = date.day();
+    return date.subtract(youbiNum, "days");
+}
+
 onMounted(() => {
-   let date = moment().startOf("month");
-   const youbiNum = date.day();
-   console.log(youbiNum) 
-});
+    console.log(getStartDate())
+})
 
 </script>
 
