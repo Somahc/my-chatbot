@@ -83,6 +83,4 @@ onMounted(() => {
             </div>
         </div>
     </div>
-
-     <v-calendar expanded></v-calendar>
 </template>
