@@ -21,6 +21,11 @@ const getEndDate = () => {
     return date.add(6 - youbiNum, "days");
 }
 
+const youbi = (dayIndex) => {
+    const week = ["日", "月", "火", "水", "木", "金", "土"];
+    return week[dayIndex];
+}
+
 //カレンダーの日付を保存
 const getCalendar = () => {
     let startDate = getStartDate();
@@ -66,6 +71,13 @@ onMounted(() => {
     <button @click="prevMonth">前の月</button>
     <button @click="nextMonth">次の月</button>
     <div class="calendar">
+        <!--曜日表示部-->
+        <div class="calendar-weekly">
+            <div class="calendar-youbi" v-for="n in 7" :key="n">
+                {{ youbi(n-1) }}
+            </div>
+        </div>
+        <!--日付表示部-->
         <div 
             v-for="(week, index) in calendars" 
             :key="index" 
@@ -115,4 +127,12 @@ onMounted(() => {
 .calendar-day{
   text-align: center;
 }
+
+.calendar-youbi{
+  flex:1;
+  border-right:1px solid #E0E0E0;
+  margin-right:-1px;
+  text-align:center;
+}
+
 </style>
