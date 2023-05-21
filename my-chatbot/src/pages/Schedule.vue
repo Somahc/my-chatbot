@@ -62,7 +62,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <h2>{{ currentDate }}</h2>
+    <h2>{{ currentDate.format('YYYY[年]M[月]') }}</h2>
     <button @click="prevMonth">前の月</button>
     <button @click="nextMonth">次の月</button>
     <div class="calendar">
