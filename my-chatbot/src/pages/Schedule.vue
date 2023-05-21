@@ -65,22 +65,54 @@ onMounted(() => {
     <h2>{{ currentDate }}</h2>
     <button @click="prevMonth">前の月</button>
     <button @click="nextMonth">次の月</button>
-    <div style="max-width:900px;border-top:1px solid gray;">
+    <div class="calendar">
         <div 
             v-for="(week, index) in calendars" 
             :key="index" 
-            style="display:flex;border-left:1px solid gray;"
+            class="calendar-weekly"
         >
             <div v-for="(day, index) in week" 
                 :key="index"
-                style="
-                    flex:1;min-height: 125px;
-                    border-right:1px solid gray;
-                    border-bottom:1px solid gray
-                "
+                class="calendar-daily"
             >
+                <div class="calendar-day">
                 {{ day.date }}
+                </div>
             </div>
         </div>
     </div>
 </template>
+
+<style>
+.content{
+  margin:2em auto;
+  width:900px;
+}
+.button-area{
+  margin:0.5em 0;
+}
+.button{
+  padding:4px 8px;
+  margin-right:8px;
+}
+.calendar{
+  max-width:900px;
+  border-top:1px solid #E0E0E0;
+  font-size:0.8em;
+}
+.calendar-weekly{
+  display:flex;
+  border-left:1px solid #E0E0E0;
+  /* background-color: black; */
+}
+.calendar-daily{
+  flex:1;
+  min-height:125px;
+  border-right:1px solid #E0E0E0;
+  border-bottom:1px solid #E0E0E0;
+  margin-right:-1px;
+}
+.calendar-day{
+  text-align: center;
+}
+</style>
