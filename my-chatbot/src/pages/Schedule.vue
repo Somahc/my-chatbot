@@ -7,7 +7,7 @@ const currentDate = ref(moment());
 
 //カレンダー最初の日を取得
 const getStartDate = () => {
-    let date = moment(currentDate);
+    let date = moment(currentDate.value);
     date.startOf("month");
     const youbiNum = date.day();
     return date.subtract(youbiNum, "days");
@@ -15,7 +15,7 @@ const getStartDate = () => {
 
 //カレンダー最終日を取得
 const getEndDate = () => {
-    let date = moment(currentDate);
+    let date = moment(currentDate.value);
     date.endOf("month");
     const youbiNum = date.day();
     return date.add(6 - youbiNum, "days");
@@ -46,11 +46,12 @@ const calendars = computed(() => {
 })
 
 const nextMonth = () => {
-    currentDate.value = moment(currentDate).add(1, "month");
+    currentDate.value = moment(currentDate.value).add(1, "month");
+    console.log(currentDate.value);
 }
 
 const prevMonth = () => {
-    currentDate.value = moment(currentDate).subtract(1, "month");
+    currentDate.value = moment(currentDate.value).subtract(1, "month");
 }
 onMounted(() => {
     console.log(getStartDate())
