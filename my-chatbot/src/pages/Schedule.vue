@@ -28,18 +28,19 @@ const youbi = (dayIndex) => {
 
 //カレンダーの日付を保存
 const getCalendar = () => {
-    let startDate = getStartDate();
+    let calendarDate = getStartDate();
     const endDate = getEndDate();
-    const weekNumber = Math.ceil(endDate.diff(startDate, "days") / 7);
+    const weekNumber = Math.ceil(endDate.diff(calendarDate, "days") / 7);
 
     let calendars = [];
     for (let week = 0; week < weekNumber; week++) {
         let weekRow = [];
         for (let day = 0; day < 7; day++) {
             weekRow.push({
-                date: startDate.get("date"),
+                date: calendarDate.get("date"),
+                month: calendarDate.format("YYYY-MM"),
             });
-            startDate.add(1, "days");
+            calendarDate.add(1, "days");
         }
         calendars.push(weekRow);
     }
@@ -50,6 +51,10 @@ const calendars = computed(() => {
     return getCalendar();
 })
 
+const currentMonth = computed(() => {
+    return currentDate.value.format("YYYY-MM");
+})
+
 const nextMonth = () => {
     currentDate.value = moment(currentDate.value).add(1, "month");
     console.log(currentDate.value);
@@ -58,6 +63,8 @@ const nextMonth = () => {
 const prevMonth = () => {
     currentDate.value = moment(currentDate.value).subtract(1, "month");
 }
+
+
 onMounted(() => {
     console.log(getStartDate())
     console.log(getEndDate())
@@ -86,6 +93,7 @@ onMounted(() => {
             <div v-for="(day, index) in week" 
                 :key="index"
                 class="calendar-daily"
+                :class="{outside: currentMonth !== day.month}"
             >
                 <div class="calendar-day">
                 {{ day.date }}
@@ -135,4 +143,7 @@ onMounted(() => {
   text-align:center;
 }
 
+.outside{
+  background-color: #f7f7f7;
+}
 </style>
