@@ -77,9 +77,13 @@ const getDayEvents = (date) => {
     let dayEvents = [];
     events.forEach(event => {
         let startDate = moment(event.start).format('YYYY-MM-DD')
+        let endDate = moment(event.end).format('YYYY-MM-DD')
         let Date = date.format('YYYY-MM-DD')
+
         if(startDate == Date) {
-            dayEvents.push(event)
+            let betweenDays = moment(endDate).diff(moment(startDate),"days")
+            let width = betweenDays * 100 + 95;
+            dayEvents.push({...event, width})
         }
     });
     return dayEvents;
@@ -122,7 +126,7 @@ onMounted(() => {
                 <div v-for="dayEvent in day.dayEvents" :key="dayEvent.id">
                     <div
                         class="calendar-event"
-                        :style="`background-color:${dayEvent.color}`"
+                        :style="`width:${dayEvent.width}%;background-color:${dayEvent.color}`"
                         draggable="true" >
                         {{ dayEvent.name }}
                     </div>
