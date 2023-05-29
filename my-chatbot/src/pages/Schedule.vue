@@ -6,7 +6,10 @@ import { onMounted, computed, ref } from 'vue';
 const currentDate = ref(moment());
 
 let events = [
-    { id: 1, name: "テスト", start: "2023-05-07", end: "2023-05-07", color: "blue"}
+    { id: 1, name: "テスト", start: "2023-05-07", end: "2023-05-08", color: "blue"},
+    { id: 2, name: "テスト2", start: "2023-05-07", end: "2023-05-07", color: "red"},
+    { id: 3, name: "テスト3", start: "2023-05-07", end: "2023-05-07", color: "orange"}
+
 ]
 
 //カレンダー最初の日を取得
@@ -71,12 +74,15 @@ const prevMonth = () => {
 }
 
 const getDayEvents = (date) => {
-    return events.filter(event => {
+    let dayEvents = [];
+    events.forEach(event => {
         let startDate = moment(event.start).format('YYYY-MM-DD')
-        let endDate = moment(event.end).format('YYYY-MM-DD')
         let Date = date.format('YYYY-MM-DD')
-        if(startDate <= Date && endDate >= Date) return true;
+        if(startDate == Date) {
+            dayEvents.push(event)
+        }
     });
+    return dayEvents;
 }
 
 
@@ -116,7 +122,8 @@ onMounted(() => {
                 <div v-for="dayEvent in day.dayEvents" :key="dayEvent.id">
                     <div
                         class="calendar-event"
-                        :style="`background-color:${dayEvent.color}`">
+                        :style="`background-color:${dayEvent.color}`"
+                        draggable="true" >
                         {{ dayEvent.name }}
                     </div>
                 </div>
