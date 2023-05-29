@@ -43,7 +43,7 @@ const getCalendar = () => {
     for (let week = 0; week < weekNumber; week++) {
         let weekRow = [];
         for (let day = 0; day < 7; day++) {
-            let dayEvents = getDayEvents(calendarDate)
+            let dayEvents = getDayEvents(calendarDate, day);
             weekRow.push({
                 date: calendarDate.get("date"),
                 month: calendarDate.format("YYYY-MM"),
@@ -73,7 +73,7 @@ const prevMonth = () => {
     currentDate.value = moment(currentDate.value).subtract(1, "month");
 }
 
-const getDayEvents = (date) => {
+const getDayEvents = (date, day) => {
     let dayEvents = [];
     events.forEach(event => {
         let startDate = moment(event.start).format('YYYY-MM-DD')
@@ -81,12 +81,20 @@ const getDayEvents = (date) => {
         let Date = date.format('YYYY-MM-DD')
 
         if(startDate == Date) {
-            let betweenDays = moment(endDate).diff(moment(startDate),"days")
-            let width = betweenDays * 100 + 95;
+            let width = getEventWidth(startDate, endDate, day)
             dayEvents.push({...event, width})
         }
     });
     return dayEvents;
+}
+
+const getEventWidth = (end, start, day) => {
+    let betweenDays = moment(end).diff(moment(start), "days")
+    if(betweenDays > 6 - day) { // イベント開始から終了までの日数が1週間の残りの日数より多いか少ないか判定
+        return (6 - day) * 100 + 95;
+    }else{
+        return betweenDays * 100 + 95;
+    }
 }
 
 
