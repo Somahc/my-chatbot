@@ -5,6 +5,10 @@ import { onMounted, computed, ref } from 'vue';
 
 const currentDate = ref(moment());
 
+let events = [
+    { id: 1, name: "テスト", start: "2023-05-07", end: "2023-05-07", color: "blue"}
+]
+
 //カレンダー最初の日を取得
 const getStartDate = () => {
     let date = moment(currentDate.value);
@@ -36,9 +40,11 @@ const getCalendar = () => {
     for (let week = 0; week < weekNumber; week++) {
         let weekRow = [];
         for (let day = 0; day < 7; day++) {
+            let dayEvents = getDayEvents(calendarDate)
             weekRow.push({
                 date: calendarDate.get("date"),
                 month: calendarDate.format("YYYY-MM"),
+                dayEvents
             });
             calendarDate.add(1, "days");
         }
@@ -62,6 +68,15 @@ const nextMonth = () => {
 
 const prevMonth = () => {
     currentDate.value = moment(currentDate.value).subtract(1, "month");
+}
+
+const getDayEvents = (date) => {
+    return events.filter(event => {
+        let startDate = moment(event.start).format('YYYY-MM-DD')
+        let endDate = moment(event.end).format('YYYY-MM-DD')
+        let Date = date.format('YYYY-MM-DD')
+        if(startDate <= Date && endDate >= Date) return true;
+    });
 }
 
 
@@ -96,7 +111,14 @@ onMounted(() => {
                 :class="{outside: currentMonth !== day.month}"
             >
                 <div class="calendar-day">
-                {{ day.date }}
+                    {{ day.date }}
+                </div>
+                <div v-for="dayEvent in day.dayEvents" :key="dayEvent.id">
+                    <div
+                        class="calendar-event"
+                        :style="`background-color:${dayEvent.color}`">
+                        {{ dayEvent.name }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -146,4 +168,12 @@ onMounted(() => {
 .outside{
   background-color: #f7f7f7;
 }
+
+.calendar-event{
+  color:white;
+  margin-bottom:1px;
+  height:25px;
+  line-height:25px;
+}
+
 </style>
