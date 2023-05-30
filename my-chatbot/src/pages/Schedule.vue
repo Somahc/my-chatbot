@@ -6,7 +6,7 @@ import { onMounted, computed, ref } from 'vue';
 const currentDate = ref(moment());
 
 let events = [
-    { id: 1, name: "テスト", start: "2023-05-07", end: "2023-05-08", color: "blue"},
+    { id: 1, name: "テスト", start: "2023-05-07", end: "2023-05-15", color: "blue"},
     { id: 2, name: "テスト2", start: "2023-05-07", end: "2023-05-07", color: "red"},
     { id: 3, name: "テスト3", start: "2023-05-07", end: "2023-05-07", color: "orange"}
 
@@ -43,7 +43,7 @@ const getCalendar = () => {
     for (let week = 0; week < weekNumber; week++) {
         let weekRow = [];
         for (let day = 0; day < 7; day++) {
-            let dayEvents = getDayEvents(calendarDate)
+            let dayEvents = getDayEvents(calendarDate, day);
             weekRow.push({
                 date: calendarDate.get("date"),
                 month: calendarDate.format("YYYY-MM"),
@@ -73,7 +73,7 @@ const prevMonth = () => {
     currentDate.value = moment(currentDate.value).subtract(1, "month");
 }
 
-const getDayEvents = (date) => {
+const getDayEvents = (date, day) => {
     let dayEvents = [];
     events.forEach(event => {
         let startDate = moment(event.start).format('YYYY-MM-DD')
@@ -81,14 +81,21 @@ const getDayEvents = (date) => {
         let Date = date.format('YYYY-MM-DD')
 
         if(startDate == Date) {
-            let betweenDays = moment(endDate).diff(moment(startDate),"days")
-            let width = betweenDays * 100 + 95;
+            let width = getEventWidth(startDate, endDate, day)
             dayEvents.push({...event, width})
         }
     });
     return dayEvents;
 }
 
+const getEventWidth = (start, end, day) => {
+    let betweendDays = moment(end).diff(moment(start), "days")
+    if (betweendDays > 6 - day) {
+        return (6 - day) * 100 + 95;
+    } else {
+        return betweendDays * 100 + 95;
+    }
+}
 
 onMounted(() => {
     console.log(getStartDate())
