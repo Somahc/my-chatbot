@@ -80,9 +80,14 @@ const getDayEvents = (date, day) => {
         let endDate = moment(event.end).format('YYYY-MM-DD')
         let Date = date.format('YYYY-MM-DD')
 
-        if(startDate == Date) {
-            let width = getEventWidth(startDate, endDate, day)
-            dayEvents.push({...event, width})
+        if (startDate <= Date && endDate >= Date) {
+            if(startDate === Date) {
+                let width = getEventWidth(startDate, endDate, day)
+                dayEvents.push({...event, width})
+            } else if (day === 0) {
+                let width = getEventWidth(date, endDate, day)
+                dayEvents.push({...event, width})
+            }
         }
     });
     return dayEvents;
