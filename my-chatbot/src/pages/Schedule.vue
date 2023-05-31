@@ -131,10 +131,10 @@ onMounted(() => {
 </script>
 
 <template>
-    <h2>{{ currentDate.format('YYYY[年]M[月]') }}</h2>
-    <button @click="prevMonth">前の月</button>
-    <button @click="nextMonth">次の月</button>
-    <div class="calendar">
+    <h2 class="contentCenterText">{{ currentDate.format('YYYY[年]M[月]') }}</h2>
+    <button class="contentCenterText" @click="prevMonth">前の月</button>
+    <button class="contentCenterText" @click="nextMonth">次の月</button>
+    <div class="calendar contentCenter">
         <!--曜日表示部-->
         <div class="calendar-weekly">
             <div class="calendar-youbi" v-for="n in 7" :key="n">
@@ -281,4 +281,11 @@ onMounted(() => {
     font-weight: 700;
 }
 
+.contentCenter{
+    margin: 0 auto;
+}
+
+.contentCenterText{
+    text-align:  center;
+}
 </style>
