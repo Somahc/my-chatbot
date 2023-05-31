@@ -38,9 +38,9 @@ import {
         nav
         dense
       >
-        <v-list-item prepend-icon="mdi-home" title="Top" href="/"></v-list-item>
-        <v-list-item prepend-icon="mdi-chat" title="Chat" href="/chat"></v-list-item>
-        <v-list-item prepend-icon="mdi-calendar-month" title="Schedule" href="/schedule"></v-list-item>
+        <v-list-item prepend-icon="mdi-home" title="トップ" href="/" class="sidebar"></v-list-item>
+        <v-list-item prepend-icon="mdi-chat" title="チャット" href="/chat"></v-list-item>
+        <v-list-item prepend-icon="mdi-calendar-month" title="スケジュール" href="/schedule"></v-list-item>
 
       </v-list>
     </v-navigation-drawer>
